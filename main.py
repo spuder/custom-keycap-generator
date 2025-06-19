@@ -34,7 +34,7 @@ if __name__ == '__main__':
                 key_conf
         )
         for mod in modifiers:
-            config = config | style['modifiers'][mod]
+            config = config | style.get('modifiers', {}).get(mod, {})
         stem = stem_from_config(**config.pop('stem', {}))
         key_config = KeyConfig(**config)
         key = Key(key_config, stem)
