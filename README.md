@@ -22,6 +22,14 @@ Python dependencies:
 - PyYaml
 - tqdm
 
+## Setup (virtual environment)
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On macOS/Linux
+pip install build123d numpy pyyaml tqdm
+```
+
 ## Usage
 
 Run `python main.py -h` for usage.
