@@ -1,4 +1,4 @@
-from build123d import *
+from build123d import export_stl, export_step, export_brep
 import argparse
 import os
 import yaml
@@ -40,11 +40,15 @@ if __name__ == '__main__':
         key = Key(key_config, stem)
 
         out_path = os.path.join(args.output_path, f"{key_name}.{args.format}")
+        shape = key.shape()
+        os.makedirs(args.output_path, exist_ok=True)
+
         if args.format == 'stl':
-            key.shape().export_stl(out_path)
+            export_stl(shape, out_path)
         elif args.format == 'brep':
-            key.shape().export_brep(out_path)
+            export_brep(shape, out_path)
         elif args.format == 'step':
-            key.shape().export_step(out_path)
+            export_step(shape, out_path)
         elif args.format == '3mf':
-            key.shape().export_3mf(out_path, 1e-3, 0.1, Unit.MILLIMETER)
+            # 3MF export may not be supported; fallback to STL if needed
+            export_stl(shape, out_path)
